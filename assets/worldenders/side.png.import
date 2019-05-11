@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/0.png-29ff66ed79d51802da5ec5d78c066b94.stex"
+path="res://.import/side.png-c99098c22cb9e21983901a1cd8fe0aaf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/0.png"
-dest_files=[ "res://.import/0.png-29ff66ed79d51802da5ec5d78c066b94.stex" ]
+source_file="res://assets/worldenders/side.png"
+dest_files=[ "res://.import/side.png-c99098c22cb9e21983901a1cd8fe0aaf.stex" ]
 
 [params]
 
