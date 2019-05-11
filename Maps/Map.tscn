@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://tilesets/0.png" type="Texture" id=1]
-[ext_resource path="res://Actors/MovingPlatform.tscn" type="PackedScene" id=2]
-[ext_resource path="res://MapParts/WorldEnder.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MapParts/FlipLine.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tilesets/0.png" type="Texture" id=2]
+[ext_resource path="res://Actors/spike/spikes.png" type="Texture" id=3]
+[ext_resource path="res://MapParts/WorldEnder.tscn" type="PackedScene" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -54,7 +55,7 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 
 [sub_resource type="TileSet" id=17]
 0/name = "0.png 0"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 56, 16 )
@@ -121,24 +122,24 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 } ]
 0/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=18]
-points = PoolVector2Array( 0, 8, 4, 4, 8, 8 )
+[sub_resource type="ConvexPolygonShape2D" id=23]
+points = PoolVector2Array( 8, 8, 0, 8, 4, 4 )
 
-[sub_resource type="ConvexPolygonShape2D" id=19]
+[sub_resource type="ConvexPolygonShape2D" id=24]
+points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=25]
 points = PoolVector2Array( 8, 8, 4, 4, 8, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=20]
+[sub_resource type="ConvexPolygonShape2D" id=26]
 points = PoolVector2Array( 8, 0, 4, 4, 0, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=21]
-points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 
 [sub_resource type="TileSet" id=22]
 0/name = "spikes.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 24, 0, 8, 8 )
+0/region = Rect2( 16, 0, 8, 8 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -146,7 +147,7 @@ points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 18 ),
+"shape": SubResource( 23 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -154,7 +155,7 @@ points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 1/texture = ExtResource( 3 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 16, 8, 8 )
+1/region = Rect2( 40, 16, 8, 8 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
@@ -162,7 +163,7 @@ points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 19 ),
+"shape": SubResource( 24 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -170,7 +171,7 @@ points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 2/texture = ExtResource( 3 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 24, 40, 8, 8 )
+2/region = Rect2( 0, 24, 8, 8 )
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
 2/navigation_offset = Vector2( 0, 0 )
@@ -178,7 +179,7 @@ points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 20 ),
+"shape": SubResource( 25 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 2/z_index = 0
@@ -186,7 +187,7 @@ points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 3/texture = ExtResource( 3 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 40, 16, 8, 8 )
+3/region = Rect2( 24, 40, 8, 8 )
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
 3/navigation_offset = Vector2( 0, 0 )
@@ -194,12 +195,14 @@ points = PoolVector2Array( 0, 0, 4, 4, 0, 8 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 21 ),
+"shape": SubResource( 26 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
 
 [node name="Map" type="Node"]
+
+[node name="FlipLine" parent="." instance=ExtResource( 1 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 modulate = Color( 0.231373, 0.180392, 0.34902, 1 )
@@ -209,23 +212,20 @@ cell_quadrant_size = 8
 format = 1
 tile_data = PoolIntArray( -65543, 0, 0, -65542, 0, 3, -65541, 0, 3, -65540, 0, 3, -65539, 0, 3, -65538, 0, 3, -65537, 0, 3, -131072, 0, 3, -131071, 0, 3, -131070, 0, 3, -131069, 0, 3, -131068, 0, 1, -131064, 0, 0, -131063, 0, 3, -131062, 0, 3, -131061, 0, 3, -131060, 0, 3, -131059, 0, 3, -131058, 0, 3, -131057, 0, 3, -131056, 0, 3, -131055, 0, 1, -131048, 0, 0, -131047, 0, 3, -131046, 0, 1, -7, 0, 2, -6, 0, 6, -5, 0, 6, -4, 0, 6, -3, 0, 6, -2, 0, 6, -1, 0, 6, -65536, 0, 6, -65535, 0, 6, -65534, 0, 6, -65533, 0, 6, -65532, 0, 5, -65528, 0, 2, -65527, 0, 6, -65526, 0, 6, -65525, 0, 6, -65524, 0, 6, -65523, 0, 6, -65522, 0, 6, -65521, 0, 6, -65520, 0, 6, -65519, 0, 5, -65512, 0, 2, -65511, 0, 6, -65510, 0, 5, 65529, 0, 2, 65530, 0, 6, 65531, 0, 6, 65532, 0, 6, 65533, 0, 6, 65534, 0, 6, 65535, 0, 6, 0, 0, 6, 1, 0, 6, 2, 0, 6, 3, 0, 6, 4, 0, 5, 8, 0, 2, 9, 0, 6, 10, 0, 6, 11, 0, 6, 12, 0, 6, 13, 0, 6, 14, 0, 6, 15, 0, 6, 16, 0, 6, 17, 0, 5, 24, 0, 2, 25, 0, 6, 26, 0, 5, 131065, 0, 65536, 131066, 0, 4, 131067, 0, 4, 131068, 0, 4, 131069, 0, 4, 131070, 0, 4, 131071, 0, 4, 65536, 0, 4, 65537, 0, 4, 65538, 0, 4, 65539, 0, 4, 65540, 0, 65537, 65544, 0, 65536, 65545, 0, 4, 65546, 0, 4, 65547, 0, 4, 65548, 0, 4, 65549, 0, 4, 65550, 0, 4, 65551, 0, 4, 65552, 0, 4, 65553, 0, 65537, 65560, 0, 65536, 65561, 0, 4, 65562, 0, 65537 )
 
-[node name="lights" type="Node2D" parent="."]
-
-[node name="hazards" type="Node2D" parent="."]
-
-[node name="Node2D" parent="hazards" instance=ExtResource( 2 )]
-position = Vector2( 80, -32 )
-
-[node name="WorldEnder" parent="." instance=ExtResource( 3 )]
-position = Vector2( 304, 0 )
-
-[node name="PlayerSpawn" type="Node2D" parent="."]
-position = Vector2( -32, -80 )
-
 [node name="spikemap" type="TileMap" parent="."]
 tile_set = SubResource( 22 )
 cell_size = Vector2( 8, 8 )
 cell_quadrant_size = 8
 format = 1
-tile_data = PoolIntArray( -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -196594, 0, 0, -196593, 0, 0, -196592, 0, 0, -196591, 0, 0, -131065, 1, 0, -131054, 3, 0, -65529, 1, 0, -65518, 3, 0, 7, 1, 0, 18, 3, 0, 65543, 1, 0, 65554, 3, 0, 131080, 2, 0, 131081, 2, 0, 131082, 2, 0, 131083, 2, 0, 131084, 2, 0, 131085, 2, 0, 131086, 2, 0, 131087, 2, 0, 131088, 2, 0, 131089, 2, 0 )
+tile_data = PoolIntArray( -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -196594, 0, 0, -196593, 0, 0, -196592, 0, 0, -196591, 0, 0, 131086, 3, 0, 131087, 3, 0, 131088, 3, 0, 131089, 3, 0 )
+
+[node name="lights" type="Node2D" parent="."]
+
+[node name="hazards" type="Node2D" parent="."]
+
+[node name="WorldEnder" parent="." instance=ExtResource( 4 )]
+position = Vector2( 304, 0 )
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2( -32, -80 )
 

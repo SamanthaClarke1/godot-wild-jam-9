@@ -1,21 +1,27 @@
 extends KinematicBody2D
 
+#settings set from moving platform node2d parent
+var auto_enable
+var can_be_seen
+var is_circular
+var cpos
+var speed
+
 onready var SPRITE = get_node("Sprite")
+onready var DETECTOR = get_node("Detector")
 var LineScn = preload("res://Actors/Moving-Platform-Line.tscn")
 
-export(bool) var auto_enable = true
-export(bool) var can_be_seen = true
-export(float) var is_circular = true
-export(float) var cpos = 0
-export(float) var speed = 25
-
-var is_enabled = false
+var is_enabled = false setget set_is_enabled
+func set_is_enabled(f):
+	is_enabled = f
 
 var points = []
 var toLengths = []
 
 var dir = 1
 var lenCap = 0
+
+onready var PARENT = get_parent()
 
 func makeLines(posArr, isCircular = false):
 	var tx = LineScn.instance()
@@ -27,6 +33,14 @@ func makeLines(posArr, isCircular = false):
 		tx.add_point(posArr[0])
 	
 	get_parent().get_node("Points").add_child(tx)
+
+func load_settings():
+	auto_enable = PARENT.auto_enable
+	can_be_seen = PARENT.can_be_seen
+	is_circular = PARENT.is_circular
+	cpos = PARENT.cpos
+	speed = PARENT.speed
+	SPRITE.flip_v = PARENT.flipv
 
 func load_points():
 	points = []
@@ -49,6 +63,8 @@ func load_points():
 	dir = 1
 	if auto_enable:
 		is_enabled = true
+	
+	position = getPositionAlongPoints(cpos)
 
 func getPositionAlongLine(pos, lineNum):
 	pos -= toLengths[lineNum]
@@ -62,9 +78,15 @@ func getPositionAlongPoints(cpos):
 			return getPositionAlongLine(cpos, i)
 
 func _ready():
+	load_settings()
 	load_points()
 
 func _physics_process(delta):
+	var bodies = DETECTOR.get_overlapping_bodies()
+	for body in bodies:
+		if "Player" in body.name:
+			enable()
+	
 	if is_enabled:
 		var cSpeed = speed * delta
 		if is_circular:
@@ -75,18 +97,19 @@ func _physics_process(delta):
 		
 		cpos += cSpeed * dir
 		
-		var toPos = getPositionAlongPoints(cpos)
-		position = toPos
+		var motion = getPositionAlongPoints(cpos) - position
+		motion = move_and_slide(motion)
+		
+		for i in range(get_slide_count()):
+			var collision = get_slide_collision(i)
+			if "MovingPlatform" in collision.collider.name:
+				collision.collider.set_is_enabled(true)
 
 func enable():
-	SPRITE.play("land")
+	if not auto_enable and not is_enabled:
+		SPRITE.play("land")
 
 func _on_Sprite_animation_finished():
 	if SPRITE.animation == "land":
 		is_enabled = true
 		SPRITE.play("idle")
-
-func _on_Area2D_body_entered(body):
-	if 'Player' in body.name:
-		if not auto_enable or is_enabled:
-			enable()

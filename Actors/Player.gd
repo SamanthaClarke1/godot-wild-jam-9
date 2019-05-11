@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var SPRITE = get_node("Sprite")
+onready var ROOTNODE = get_node("/root/Node2D")
 
 const COYOTE_TIME = 0.1
 const JUMP_GRACE_TIME = 0.1 
@@ -37,21 +38,35 @@ var FLIP_LINE_Y = 0
 var wasOnFloor = false
 var mMap = ""
 
+var MAPFROMCOLOR: Color
+var MAPLIGHTCOLOR: Color
+var MAPDARKCOLOR: Color
+var MAPFLIPCOLOR_DEADZONE = 0.1
+var MAPFLIPCOLOR_SCALE = 300.0
+
 func on_map_changed(map):
 	mMap = map
 	oPosition = get_node("/root/Node2D/Map/PlayerSpawn").position
 	position = oPosition
 	isUpsideDown = false
-
+	MAPFROMCOLOR = ROOTNODE.tcolor
+	MAPDARKCOLOR = MAPFROMCOLOR.darkened(0.3)
+	MAPLIGHTCOLOR = MAPFROMCOLOR.lightened(0.3)
+	
 func respawn():
 	print(mMap)
 	Transition.fade_to_map(mMap)
 
 func _ready():
-	on_map_changed("res://Maps/FirstLevel.tscn")
+	pass
 
 func _physics_process(delta):
 	updateIsOnFloor(delta)
+	
+	var tlerp = clamp((position.y/MAPFLIPCOLOR_SCALE)+0.5, 0, 1)
+	#if tlerp > 0.5: tlerp = max(0.5+MAPFLIPCOLOR_DEADZONE, tlerp)
+	#if tlerp < 0.5: tlerp = min(0.5-MAPFLIPCOLOR_DEADZONE, tlerp)
+	ROOTNODE.applyModulate(lerp(MAPLIGHTCOLOR, MAPDARKCOLOR, tlerp))
 	
 	if isOnFloor >= COYOTE_TIME and not wasOnFloor:
 		desiredScaleAdditive = Vector2(0.05, 0)

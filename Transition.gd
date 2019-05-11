@@ -26,5 +26,4 @@ func change_map():
 		print('changemapcalled')
 		get_node("/root/Node2D").remove_child(get_node("/root/Node2D/Map"))
 		get_node("/root/Node2D").add_child(tScene.instance(), true)
-		get_node("/root/Node2D").map_changed()
-		get_node("/root/Node2D/Player").on_map_changed()
+		get_node("/root/Node2D").map_changed(mapPath)
