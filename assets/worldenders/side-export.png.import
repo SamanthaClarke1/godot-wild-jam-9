@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wipedown.png-5dbb55a70102de342226e97e928bccb3.stex"
+path="res://.import/side-export.png-7af619ff319e660d04ee5e84144e100c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/wipedown.png"
-dest_files=[ "res://.import/wipedown.png-5dbb55a70102de342226e97e928bccb3.stex" ]
+source_file="res://assets/worldenders/side-export.png"
+dest_files=[ "res://.import/side-export.png-7af619ff319e660d04ee5e84144e100c.stex" ]
 
 [params]
 
