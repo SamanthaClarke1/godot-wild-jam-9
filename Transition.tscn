@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/wipedown.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "changescene"
+resource_name = "changemap"
 length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -13,7 +13,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.7 ),
+"times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -45,5 +45,6 @@ texture = ExtResource( 2 )
 stretch_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/changemap = SubResource( 1 )
 anims/changescene = SubResource( 1 )
 
