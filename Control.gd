@@ -15,6 +15,7 @@ func _ready():
 
 func _on_startbutton_pressed():
 	pass # Replace with function body.
+	get_tree().change_scene("res://Root.tscn");
 
 
 func _on_quitButton_pressed():
