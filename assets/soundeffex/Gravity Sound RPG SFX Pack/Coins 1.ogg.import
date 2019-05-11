@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Coins 1.ogg-ca2039b7e3ced827758d52ebd6ab7987.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Coins 1.ogg"
+dest_files=[ "res://.import/Coins 1.ogg-ca2039b7e3ced827758d52ebd6ab7987.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

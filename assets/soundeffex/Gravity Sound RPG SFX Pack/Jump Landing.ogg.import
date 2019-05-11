@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Jump Landing.ogg-f56b8d3a107d0961d568eb49485a7400.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Jump Landing.ogg"
+dest_files=[ "res://.import/Jump Landing.ogg-f56b8d3a107d0961d568eb49485a7400.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

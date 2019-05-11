@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Jump into Snow.ogg-96650e1f39c7e65047af22fc0bb9455c.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Jump into Snow.ogg"
+dest_files=[ "res://.import/Jump into Snow.ogg-96650e1f39c7e65047af22fc0bb9455c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

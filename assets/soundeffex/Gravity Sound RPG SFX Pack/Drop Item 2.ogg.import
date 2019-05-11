@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Drop Item 2.ogg-4a49db21fbf3eef4a91b083fdbbe849b.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Drop Item 2.ogg"
+dest_files=[ "res://.import/Drop Item 2.ogg-4a49db21fbf3eef4a91b083fdbbe849b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Metal Hit.ogg-8a97b1a05527ed5bf963c9d0c55045b1.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Metal Hit.ogg"
+dest_files=[ "res://.import/Metal Hit.ogg-8a97b1a05527ed5bf963c9d0c55045b1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

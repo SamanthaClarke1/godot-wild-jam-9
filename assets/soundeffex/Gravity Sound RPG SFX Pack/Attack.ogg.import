@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Attack.ogg-718a85f27456b72f11a28556eac10d83.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Attack.ogg"
+dest_files=[ "res://.import/Attack.ogg-718a85f27456b72f11a28556eac10d83.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Open Door.ogg-3a0aa31dc821c43d9740047666bd560f.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Open Door.ogg"
+dest_files=[ "res://.import/Open Door.ogg-3a0aa31dc821c43d9740047666bd560f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

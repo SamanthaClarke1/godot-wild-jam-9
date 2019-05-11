@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Spell Miss.ogg-2933223f3b820ebe4c66f57b106d0b84.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Spell Miss.ogg"
+dest_files=[ "res://.import/Spell Miss.ogg-2933223f3b820ebe4c66f57b106d0b84.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
