@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wipedown.png-5dbb55a70102de342226e97e928bccb3.stex"
+path="res://.import/movingplatform.png-ed01629ea1744561c6294297c105f5c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/wipedown.png"
-dest_files=[ "res://.import/wipedown.png-5dbb55a70102de342226e97e928bccb3.stex" ]
+source_file="res://assets/movingplatform.png"
+dest_files=[ "res://.import/movingplatform.png-ed01629ea1744561c6294297c105f5c5.stex" ]
 
 [params]
 

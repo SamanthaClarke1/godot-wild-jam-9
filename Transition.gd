@@ -14,7 +14,6 @@ func fade_to_scene(scn_path):
 
 func change_scene():
 	if mapPath != "":
-		print('changescenecalled')
 		get_tree().change_scene(changingSceneTo)
 
 func fade_to_map(scn_path):

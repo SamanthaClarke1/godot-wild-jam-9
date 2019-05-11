@@ -35,14 +35,20 @@ var desiredScale = Vector2(1, 1)
 var desiredScaleAdditive = Vector2(0, 0)
 var FLIP_LINE_Y = 0
 var wasOnFloor = false
+var mMap = ""
 
-func on_map_changed():
+func on_map_changed(map):
+	mMap = map
 	oPosition = get_node("/root/Node2D/Map/PlayerSpawn").position
 	position = oPosition
 	isUpsideDown = false
 
+func respawn():
+	print(mMap)
+	Transition.fade_to_map(mMap)
+
 func _ready():
-	on_map_changed()
+	on_map_changed("res://Maps/FirstLevel.tscn")
 
 func _physics_process(delta):
 	updateIsOnFloor(delta)
@@ -95,6 +101,9 @@ func _physics_process(delta):
 	#if position.y > 400:
 		#Transition.fade_to(world_scene)
 	#	respawn()
+	
+	if Input.is_action_just_pressed("reset"):
+		respawn()
 
 	wasOnFloor = isOnFloor == COYOTE_TIME
 	timeSinceTouchedFloor += delta

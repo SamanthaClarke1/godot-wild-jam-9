@@ -14,6 +14,7 @@ position = Vector2( 16, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+z_index = 2
 texture = ExtResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_WorldEnder_body_entered"]
