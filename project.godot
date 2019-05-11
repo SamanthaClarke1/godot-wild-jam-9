@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Transition="*res://Transition.tscn"
+Overlay="*res://Overlay.tscn"
 
 [display]
 
