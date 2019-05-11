@@ -86,7 +86,7 @@ func summonSkid(pos, dir):
 func updateIsOnFloor(delta):
 	if is_on_floor():
 		isOnFloor = COYOTE_TIME
-	elif isOnFloor > 0: 
+	elif isOnFloor > 0:
 		isOnFloor -= delta
 
 func fallAndSlide(delta):
