@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://KinematicBody.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-
-[sub_resource type="AnimatedTexture" id=2]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.1795, 7.45852 )
 
 [node name="KinematicBody" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 7.15969, 6.61277 )
-scale = Vector2( 12.9328, 13.3306 )
-texture = SubResource( 2 )
+position = Vector2( 2.98023e-07, -2.98023e-07 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
 
