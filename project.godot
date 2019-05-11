@@ -19,6 +19,10 @@ config/name="WildJam"
 run/main_scene="res://Node2D.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Transition="*res://Transition.tscn"
+
 [display]
 
 window/size/width=320
