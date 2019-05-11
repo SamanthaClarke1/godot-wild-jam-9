@@ -1,0 +1,27 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://FX/skid-swush/skid-swush1.png" type="Texture" id=1]
+[ext_resource path="res://FX/skid-swush/skid-swush2.png" type="Texture" id=2]
+[ext_resource path="res://FX/skid-swush/skid-swush3.png" type="Texture" id=3]
+[ext_resource path="res://FX/skid-swush/skid-swush4.png" type="Texture" id=4]
+[ext_resource path="res://FX/skid-swush/skid-swush5.png" type="Texture" id=5]
+[ext_resource path="res://FX/skid-swush/skid-swush6.png" type="Texture" id=6]
+[ext_resource path="res://FX/skid-swush/skid-swush7.png" type="Texture" id=7]
+[ext_resource path="res://FX/skid-swush/skid-swush8.png" type="Texture" id=8]
+[ext_resource path="res://FX/skid-swush/skid-swush9.png" type="Texture" id=9]
+[ext_resource path="res://FX/skidPoof.gd" type="Script" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[node name="skidPoof" type="AnimatedSprite"]
+z_index = 1
+frames = SubResource( 1 )
+script = ExtResource( 10 )
+
+[connection signal="animation_finished" from="." to="." method="_on_skidPoof_animation_finished"]
