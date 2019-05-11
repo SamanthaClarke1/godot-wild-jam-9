@@ -1,0 +1,6 @@
+[gd_resource type="DynamicFontData" format=2]
+
+[resource]
+antialiased = false
+font_path = "res://Fonts/novem___.ttf"
+
