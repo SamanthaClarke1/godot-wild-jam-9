@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Jump into Snow.ogg-96650e1f39c7e65047af22fc0bb9455c.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
