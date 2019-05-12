@@ -97,8 +97,10 @@ func _physics_process(delta):
 		
 		cpos += cSpeed * dir
 		
-		var motion = getPositionAlongPoints(cpos) - position
-		motion = move_and_slide(motion)
+		var pos = getPositionAlongPoints(cpos)
+		position = pos
+		#var motion = getPositionAlongPoints(cpos) - position
+		#motion = move_and_slide(motion)
 		
 		for i in range(get_slide_count()):
 			var collision = get_slide_collision(i)

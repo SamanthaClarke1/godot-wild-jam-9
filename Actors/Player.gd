@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var SPRITE = get_node("Sprite")
 onready var ROOTNODE = get_node("/root/Node2D")
+onready var DEATHTIMER = get_node("DeathTimer")
 
 const COYOTE_TIME = 0.1
 const JUMP_GRACE_TIME = 0.1 
@@ -44,6 +45,8 @@ var MAPDARKCOLOR: Color
 var MAPFLIPCOLOR_DEADZONE = 0.1
 var MAPFLIPCOLOR_SCALE = 300.0
 
+var IS_DEAD = false
+
 func on_map_changed(map):
 	mMap = map
 	oPosition = get_node("/root/Node2D/Map/PlayerSpawn").position
@@ -52,9 +55,18 @@ func on_map_changed(map):
 	MAPFROMCOLOR = ROOTNODE.tcolor
 	MAPDARKCOLOR = MAPFROMCOLOR.darkened(0.3)
 	MAPLIGHTCOLOR = MAPFROMCOLOR.lightened(0.3)
-	
+	desiredScale = Vector2(1, 1)
+	IS_DEAD = false
+
+func die(): # called by multiple objects when you die
+	if not IS_DEAD:
+		IS_DEAD = true
+		DEATHTIMER.start()
+
+func collectCoin(): # called by coins when you collect them
+	pass
+
 func respawn():
-	print(mMap)
 	Transition.fade_to_map(mMap)
 
 func _ready():
@@ -78,6 +90,8 @@ func _physics_process(delta):
 	
 	yMotFlip = -1 if isUpsideDown else 1
 	desiredScale = Vector2(1, yMotFlip)
+	if IS_DEAD:
+		desiredScale = Vector2(0,0)
 	
 	desiredScaleAdditive = lerp(desiredScaleAdditive, Vector2(0, 0), SCALE_FX_RET_SPEED)
 	SPRITE.scale = lerp(SPRITE.scale, desiredScale, SCALE_RET_SPEED) + desiredScaleAdditive
@@ -88,30 +102,36 @@ func _physics_process(delta):
 	if motion.x < 0: hasSkidded[1] = 0
 	if motion.x > 0: hasSkidded[0] = 0
 	
-	if jumpGrace > 0: jumpGrace -= delta
-	if Input.is_action_just_pressed("jump"): jumpGrace = JUMP_GRACE_TIME
+	if not IS_DEAD:
+		if jumpGrace > 0: jumpGrace -= delta
+		if Input.is_action_just_pressed("jump"): jumpGrace = JUMP_GRACE_TIME
+		
+		if isOnFloor >= COYOTE_TIME:
+			tAccel *= 3
+		
+		if Input.is_action_pressed("run_right"):
+			motion.x += tAccel
+			if motion.x + 100 < 0: summonSkid(position-Vector2(22,-10*yMotFlip), motion.x)
+			facing = 1
+		if Input.is_action_pressed("run_left"):
+			motion.x -= tAccel
+			if motion.x - 100 > 0: summonSkid(position+Vector2(22, 10*yMotFlip), motion.x)
+			facing = -1
 	
-	if isOnFloor >= COYOTE_TIME:
-		tAccel *= 3
-	
-	if Input.is_action_pressed("run_right"):
-		motion.x += tAccel
-		if motion.x + 100 < 0: summonSkid(position-Vector2(22,-10*yMotFlip), motion.x)
-		facing = 1
-	if Input.is_action_pressed("run_left"):
-		motion.x -= tAccel
-		if motion.x - 100 > 0: summonSkid(position+Vector2(22, 10*yMotFlip), motion.x)
-		facing = -1
-
-	SPRITE.flip_h = true if facing < 0 else false
-	
-	if isOnFloor >= COYOTE_TIME and jumpGrace > 0:
-		makeJumpPoof()
-		motion.y = -300 * yMotFlip
-		desiredScaleAdditive = Vector2(0.08, -0.08)
-		isJumping = true
+		SPRITE.flip_h = true if facing < 0 else false
+		
+		if isOnFloor >= COYOTE_TIME and jumpGrace > 0:
+			makeJumpPoof()
+			motion.y = -300 * yMotFlip
+			desiredScaleAdditive = Vector2(0.08, -0.08)
+			isJumping = true
 
 	fallAndSlide(delta)
+	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if "Spike" in collision.collider.name:
+			die()
 	
 	#if position.y > 400:
 		#Transition.fade_to(world_scene)
@@ -161,3 +181,6 @@ func fallAndSlide(delta):
 	motion.y += tGrav
 
 	motion = move_and_slide(motion, Vector2(0, yMotFlip * -1))
+
+func _on_DeathTimer_timeout():
+	respawn()

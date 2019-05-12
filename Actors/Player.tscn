@@ -53,3 +53,7 @@ motion_scale = Vector2( 0.08, 0.08 )
 modulate = Color( 0.356863, 0.254902, 0.576471, 1 )
 texture = ExtResource( 5 )
 
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
