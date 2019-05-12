@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var SPRITE = get_node("Sprite")
 onready var ROOTNODE = get_node("/root/Node2D")
 onready var DEATHTIMER = get_node("DeathTimer")
+onready var COLLISIONSHAPE = get_node("CollisionShape2D")
 
 const COYOTE_TIME = 0.1
 const JUMP_GRACE_TIME = 0.1 
@@ -14,7 +15,8 @@ const FRICTION = 0.14
 const SCALE_RET_SPEED = 0.15
 const SCALE_FX_RET_SPEED = 0.2
 const JUMP_HEIGHT = -300
-const TIME_SINCE_TOUCHED_FLOOR_FOR_RECOM = 10
+const TIME_SINCE_TOUCHED_FLOOR_FOR_RECOM = 7.5
+
 var isUpsideDown = false
 var yMotFlip = 1 # 1 if norm, -1 if not.
 var isJumping = true
@@ -46,20 +48,24 @@ var MAPFLIPCOLOR_DEADZONE = 0.1
 var MAPFLIPCOLOR_SCALE = 300.0
 
 var IS_DEAD = false
+var IS_RESPAWNING = false
 
 func on_map_changed(map):
 	mMap = map
 	oPosition = get_node("/root/Node2D/Map/PlayerSpawn").position
 	position = oPosition
+	motion = Vector2()
 	isUpsideDown = false
 	MAPFROMCOLOR = ROOTNODE.tcolor
 	MAPDARKCOLOR = MAPFROMCOLOR.darkened(0.3)
 	MAPLIGHTCOLOR = MAPFROMCOLOR.lightened(0.3)
 	desiredScale = Vector2(1, 1)
 	IS_DEAD = false
+	IS_RESPAWNING = false
+	timeSinceTouchedFloor = 0
 
 func die(): # called by multiple objects when you die
-	if not IS_DEAD:
+	if not IS_DEAD and not IS_RESPAWNING:
 		IS_DEAD = true
 		DEATHTIMER.start()
 
@@ -67,6 +73,7 @@ func collectCoin(): # called by coins when you collect them
 	pass
 
 func respawn():
+	IS_RESPAWNING = true
 	Transition.fade_to_map(mMap)
 
 func _ready():
@@ -95,6 +102,7 @@ func _physics_process(delta):
 	
 	desiredScaleAdditive = lerp(desiredScaleAdditive, Vector2(0, 0), SCALE_FX_RET_SPEED)
 	SPRITE.scale = lerp(SPRITE.scale, desiredScale, SCALE_RET_SPEED) + desiredScaleAdditive
+	COLLISIONSHAPE.scale = SPRITE.scale
 	
 	var tAccel = ACCEL
 	tGrav = GRAVITY * yMotFlip
@@ -141,7 +149,14 @@ func _physics_process(delta):
 		respawn()
 
 	wasOnFloor = isOnFloor == COYOTE_TIME
+	if isOnFloor == COYOTE_TIME: timeSinceTouchedFloor = 0
 	timeSinceTouchedFloor += delta
+	
+	if timeSinceTouchedFloor >= TIME_SINCE_TOUCHED_FLOOR_FOR_RECOM and not IS_DEAD and not IS_RESPAWNING:
+		Overlay.RESETPROMPT.appear()
+	else:
+		Overlay.RESETPROMPT.dissapear()
+	
 	ctr += 1
 
 func makeJumpPoof() -> void:

@@ -7,7 +7,7 @@
 [ext_resource path="res://background.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 16 )
+extents = Vector2( 7, 15 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
@@ -17,7 +17,6 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-editor/display_folded = true
 current = true
 limit_left = -1000
 limit_top = -1000
@@ -39,6 +38,7 @@ light_mask = 4
 texture = ExtResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 light_mask = 11
 texture = ExtResource( 4 )
 texture_scale = 4.0

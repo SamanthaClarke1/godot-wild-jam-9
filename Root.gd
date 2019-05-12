@@ -1,7 +1,8 @@
 extends Node2D
 
 var mapColorArr = [
-	['FirstWorld', Color(0.7, 0.4, 0.4, 1)]
+	['FirstWorld', Color(0.7, 0.4, 0.4, 1)],
+	['SecondWorld', Color(0.4, 0.5, 0.7, 1)]
 ]
 
 var tcolor = Color(1,1,1,1)
