@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Sword 13.ogg-cde8c21db03dcb67fa5650884ac24de4.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Sword 13.ogg"
+dest_files=[ "res://.import/Sword 13.ogg-cde8c21db03dcb67fa5650884ac24de4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Hit.ogg-9583c90c18263d4dd4162a67694fcd8b.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Hit.ogg"
+dest_files=[ "res://.import/Hit.ogg-9583c90c18263d4dd4162a67694fcd8b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

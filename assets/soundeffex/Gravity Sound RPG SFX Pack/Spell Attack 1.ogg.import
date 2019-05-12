@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Spell Attack 1.ogg-2313e1048dc59496a84eb5d6d7a5578e.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Spell Attack 1.ogg"
+dest_files=[ "res://.import/Spell Attack 1.ogg-2313e1048dc59496a84eb5d6d7a5578e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

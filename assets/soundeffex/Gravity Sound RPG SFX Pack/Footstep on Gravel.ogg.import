@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Footstep on Gravel.ogg-0823c2e53e6a685178c06488e1642947.oggstr"
+
+[deps]
+
+source_file="res://assets/soundeffex/Gravity Sound RPG SFX Pack/Footstep on Gravel.ogg"
+dest_files=[ "res://.import/Footstep on Gravel.ogg-0823c2e53e6a685178c06488e1642947.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
