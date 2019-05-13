@@ -13,5 +13,5 @@ func _physics_process(delta):
 
 func _on_Coin_body_entered(body):
 	if "Player" in body.name:
-		body.collectCoin()
+		body.collectCoin(self.name)
 		queue_free()

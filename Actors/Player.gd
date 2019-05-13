@@ -4,6 +4,8 @@ onready var SPRITE = get_node("Sprite")
 onready var ROOTNODE = get_node("/root/Node2D")
 onready var DEATHTIMER = get_node("DeathTimer")
 onready var COLLISIONSHAPE = get_node("CollisionShape2D")
+onready var RESPAWN_BUFFER = get_node("RespawnBuffer")
+onready var LIGHTOCCLUDER = get_node("LightOccluder2D")
 
 const COYOTE_TIME = 0.1
 const JUMP_GRACE_TIME = 0.1 
@@ -40,6 +42,7 @@ var desiredScaleAdditive = Vector2(0, 0)
 var FLIP_LINE_Y = 0
 var wasOnFloor = false
 var mMap = ""
+var pMap = ""
 
 var MAPFROMCOLOR: Color
 var MAPLIGHTCOLOR: Color
@@ -50,7 +53,14 @@ var MAPFLIPCOLOR_SCALE = 300.0
 var IS_DEAD = false
 var IS_RESPAWNING = false
 
+var ownedCoins = {}
+var tempCoins = {}
+
+func updateCoinsCollected(deep=false):
+	Overlay.COINSAMT.changeAmt(getTotalOwnedCoins())
+
 func on_map_changed(map):
+	pMap = mMap
 	mMap = map
 	oPosition = get_node("/root/Node2D/Map/PlayerSpawn").position
 	position = oPosition
@@ -61,26 +71,81 @@ func on_map_changed(map):
 	MAPLIGHTCOLOR = MAPFROMCOLOR.lightened(0.3)
 	desiredScale = Vector2(1, 1)
 	IS_DEAD = false
-	IS_RESPAWNING = false
 	timeSinceTouchedFloor = 0
+	RESPAWN_BUFFER.start()
+	
+	if not ownedCoins.get(pMap): ownedCoins[pMap] = {}
+	
+	for key in tempCoins:
+		if tempCoins[key]:
+			ownedCoins[pMap][key] = true
+			
+	if ownedCoins.get(mMap):
+		for key in ownedCoins[mMap]:
+			if ownedCoins[mMap][key]:
+				var tc = get_node("/root/Node2D/Map/Coins/"+key)
+				if tc: tc.modulate.a = 0.1
+			
+	resetTempCoins()
+	
+	updateCoinsCollected()
+	saveCoins()
+
+func saveCoins():
+	var tf = File.new()
+	if tf.open("user://coins.json", File.WRITE) != 0:
+		print("could not save!")
+	else:
+		tf.store_line(to_json(ownedCoins))
+	tf.close()
+
+func getTotalOwnedCoins():
+	var total = 0
+	for key in tempCoins: if tempCoins[key]: total += 1
+	for map in ownedCoins: if map != mMap:
+		for key in ownedCoins[map]: if ownedCoins[map][key]: total += 1
+	return total
 
 func die(): # called by multiple objects when you die
 	if not IS_DEAD and not IS_RESPAWNING:
 		IS_DEAD = true
+		resetTempCoins()
+		updateCoinsCollected()
 		DEATHTIMER.start()
 
-func collectCoin(): # called by coins when you collect them
-	pass
+func collectCoin(coinName): # called by coins when you collect them
+	tempCoins[coinName] = true
+	updateCoinsCollected()
 
 func respawn():
 	IS_RESPAWNING = true
 	Transition.fade_to_map(mMap)
+	
+func resetTempCoins():
+	for key in tempCoins:
+		tempCoins[key] = false
+	if ownedCoins.get(mMap):
+		for key in ownedCoins[mMap]: tempCoins[key] = ownedCoins[mMap][key]
 
 func _ready():
-	pass
+	Overlay.COINSAMT.appear()
+	
+	var tf = File.new()
+	if tf.open("user://coins.json", File.READ) != 0:
+		print("could not load coin file!")
+	else:
+		var tdata = parse_json(tf.get_line())
+		if tdata:
+			ownedCoins = tdata
+			updateCoinsCollected()
+		else:
+			print("couldn't parse coin file")
+	tf.close()
 
 func _physics_process(delta):
 	updateIsOnFloor(delta)
+	
+	#print(IS_RESPAWNING, IS_DEAD)
 	
 	var tlerp = clamp((position.y/MAPFLIPCOLOR_SCALE)+0.5, 0, 1)
 	#if tlerp > 0.5: tlerp = max(0.5+MAPFLIPCOLOR_DEADZONE, tlerp)
@@ -103,6 +168,7 @@ func _physics_process(delta):
 	desiredScaleAdditive = lerp(desiredScaleAdditive, Vector2(0, 0), SCALE_FX_RET_SPEED)
 	SPRITE.scale = lerp(SPRITE.scale, desiredScale, SCALE_RET_SPEED) + desiredScaleAdditive
 	COLLISIONSHAPE.scale = SPRITE.scale
+	LIGHTOCCLUDER.scale = SPRITE.scale
 	
 	var tAccel = ACCEL
 	tGrav = GRAVITY * yMotFlip
@@ -110,7 +176,7 @@ func _physics_process(delta):
 	if motion.x < 0: hasSkidded[1] = 0
 	if motion.x > 0: hasSkidded[0] = 0
 	
-	if not IS_DEAD:
+	if not IS_DEAD and not IS_RESPAWNING:
 		if jumpGrace > 0: jumpGrace -= delta
 		if Input.is_action_just_pressed("jump"): jumpGrace = JUMP_GRACE_TIME
 		
@@ -146,6 +212,7 @@ func _physics_process(delta):
 	#	respawn()
 	
 	if Input.is_action_just_pressed("reset"):
+		resetTempCoins()
 		respawn()
 
 	wasOnFloor = isOnFloor == COYOTE_TIME
@@ -199,3 +266,6 @@ func fallAndSlide(delta):
 
 func _on_DeathTimer_timeout():
 	respawn()
+
+func _on_RespawnBuffer_timeout():
+	IS_RESPAWNING = false

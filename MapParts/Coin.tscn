@@ -25,7 +25,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 3
+frame = 1
 playing = true
 
 [connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Actors/MovingPlatform-settings.gd" type="Script" id=1]
 [ext_resource path="res://Actors/MovingPlatform.gd" type="Script" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/movingplatform.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 16.0
+radius = 12.0
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( -8, -5, -5, -8, 5, -8, 8, -5, 8, 5, 5, 8, -5, 8, -8, 5 )
@@ -23,6 +23,9 @@ animations = [ {
 "name": "land",
 "speed": 5.0
 } ]
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( 4, -8, 8, -4, 8, 4, 4, 8, 2, 8, 2, 2, -2, 2, -2, 8, -4, 8, -8, 4, -8, -4, -4, -8 )
 
 [node name="MovingPlatform" type="Node2D"]
 position = Vector2( 144, 104 )
@@ -43,5 +46,10 @@ shape = SubResource( 2 )
 [node name="Sprite" type="AnimatedSprite" parent="MovingPlatform"]
 frames = SubResource( 3 )
 animation = "idle"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="MovingPlatform"]
+light_mask = 31
+occluder = SubResource( 4 )
+light_mask = 31
 
 [connection signal="animation_finished" from="MovingPlatform/Sprite" to="MovingPlatform" method="_on_Sprite_animation_finished"]

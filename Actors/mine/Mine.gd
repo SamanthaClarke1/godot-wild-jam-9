@@ -17,7 +17,10 @@ func _physics_process(delta):
 
 func _on_Mine_body_entered(body):
 	if "Player" in body.name:
+		# func start(dur=0.2, freq=15, amp=5, priority=0):
+		PLAYER.get_node("Camera2D/ScreenShake").start()
 		SPRITE.play("death")
+		$LightOccluder2D.visible = false
 		body.die() # kill the player
 
 func _on_AnimatedSprite_animation_finished():

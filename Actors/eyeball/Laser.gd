@@ -39,6 +39,8 @@ func lookTowardsPlayer():
 	RAY.force_raycast_update()
 	
 	SPRITE.rotation = toPlayer.angle() - PI / 2
+	$LightOccluder2D.rotation = toPlayer.angle() - PI / 2
+	
 	if RAY.is_colliding():
 		LASER.set_point_position(1, RAY.get_collision_point()-global_position)
 	else:

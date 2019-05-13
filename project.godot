@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="WildJam"
-run/main_scene="res://Root.tscn"
+run/main_scene="res://Control.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -85,8 +85,11 @@ reset={
 2d_render/layer_2="tiles"
 2d_render/layer_3="player"
 2d_render/layer_4="hazards"
+2d_render/layer_5="misc"
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
 quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"

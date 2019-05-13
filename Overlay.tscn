@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Overlay.gd" type="Script" id=1]
 [ext_resource path="res://Overlayscripts/Prompt.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Fonts/MainMenu.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Overlayscripts/CoinsAmt.gd" type="Script" id=4]
+[ext_resource path="res://Music/BaseMusic.tscn" type="PackedScene" id=5]
 
 [node name="OverlayLayer" type="CanvasLayer"]
 layer = 8
@@ -17,4 +20,16 @@ mouse_filter = 2
 [node name="Reload" parent="Overlay" instance=ExtResource( 2 )]
 margin_right = 136.0
 margin_bottom = 16.0
+
+[node name="CoinsAmt" type="Label" parent="Overlay"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 299.0
+margin_right = 395.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 3 )
+text = "COINS: 0"
+script = ExtResource( 4 )
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 5 )]
 

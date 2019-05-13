@@ -35,6 +35,7 @@ tracks/1/keys = {
 }
 
 [node name="WorldHolder" type="CanvasLayer"]
+layer = 3
 script = ExtResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
